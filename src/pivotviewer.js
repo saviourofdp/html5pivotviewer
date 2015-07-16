@@ -788,7 +788,7 @@
                     window.open("#pv-view-error","_self")
                 }
             } catch (ex) { 
-                console.log("Error initialising Views interfaces: " + x.message); 
+                console.log("Error initialising Views interfaces: " + ex.message); 
             }
         }
 
