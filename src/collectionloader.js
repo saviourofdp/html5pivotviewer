@@ -231,7 +231,7 @@ PivotViewer.Models.Loaders.CXMLLoader = PivotViewer.Models.Loaders.ICollectionLo
                     
                         // Handle locally defined namespaces
                         for (var j = 0; j < extension[x].childNodes.length; j++) {
-                            namespacePrefix = extension[0].childNodes[j].lookupPrefix("http://schemas.microsoft.com/livelabs/pivot/collection/2009");
+                            namespacePrefix = extension[x].childNodes[j].lookupPrefix("http://schemas.microsoft.com/livelabs/pivot/collection/2009");
                             if (namespacePrefix)
                                 break;
                         }
