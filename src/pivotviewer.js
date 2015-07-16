@@ -787,7 +787,9 @@
                     $('.pv-wrapper').append("<div id=\"pv-view-error\" class=\"pv-modal-dialog\"><div><a href=\"#pv-modal-dialog-close\" title=\"Close\" class=\"pv-modal-dialog-close\">X</a><h2>HTML5 PivotViewer</h2><p>" + msg + "</p></div></div>");
                     window.open("#pv-view-error","_self")
                 }
-            } catch (ex) { alert(ex.message); }
+            } catch (ex) { 
+                console.log("Error initialising Views interfaces: " + x.message); 
+            }
         }
 
        // The table, graph and the map view needs to know about the facet categories
