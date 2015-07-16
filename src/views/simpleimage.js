@@ -62,8 +62,12 @@ PivotViewer.Views.SimpleImageController = PivotViewer.Views.IImageController.sub
                             $.publish("/PivotViewer/ImageController/Collection/Loaded", null);
                         }
                     };
-
-                img.src = that._baseUrl + "/" + images.ImageFiles[i];
+                var imageFile = images.ImageFiles[i];
+                if(/^(https?:)?\/\//.test(imageFile)) {
+                    img.src = imageFile;
+                } else {
+                    img.src = that._baseUrl + "/" + images.ImageFiles[i];
+                }
                 that._items.push(new PivotViewer.Views.SimpleImageItem(images.ImageFiles[i], that._baseUrl, img.width, img.height, img));
            }
         })
