@@ -21,7 +21,7 @@
 ::
 @echo off
 
-type src\namespaces.js >> pivotviewer.js
+type src\namespaces.js > pivotviewer.js
 type src\pubsub.js >> pivotviewer.js
 type src\utils.js >> pivotviewer.js
 type src\models.js >> pivotviewer.js
