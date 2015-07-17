@@ -19,8 +19,8 @@
 /// Retrieves and caches images
 ///
 PivotViewer.Views.SimpleImageController = PivotViewer.Views.IImageController.subClass({
-    init: function () {
-
+    init: function (uri) {
+        this._imageFile = uri;
         this._items = [];
         this._collageItems = [];
         this._baseUrl = "";
@@ -45,8 +45,16 @@ PivotViewer.Views.SimpleImageController = PivotViewer.Views.IImageController.sub
         var that = this;
 
         // get list of image files
-        $.getJSON(baseUrl + "/imagelist.json")
-        .done (function (images) {
+        $.get(that._imageFile,  {
+            dataType: 'xml',
+            cache: true
+        })
+        .done (function (xml) {
+            var images = { 
+                ImageFiles: $('Item', xml).map(function() { 
+                    return $(this).attr('Img'); 
+                }).get() 
+            };
             // for each item in the collection get the image filename
             for (var i = 0; i < images.ImageFiles.length; i++) {
                 var img = new Image(); 
@@ -74,7 +82,7 @@ PivotViewer.Views.SimpleImageController = PivotViewer.Views.IImageController.sub
                 that._items.push(new PivotViewer.Views.SimpleImageItem(images.ImageFiles[i], that._baseUrl, img.width, img.height, img));
            }
         })
-        .fail (function (jqxhr, textStatus, errorThrown) {
+        .fail (function (jqXHR, textStatus, errorThrown) {
             //Make sure throbber is removed else everyone thinks the app is still running
             $('.pv-loading').remove();
 
