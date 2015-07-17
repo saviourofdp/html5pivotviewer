@@ -56,11 +56,14 @@ PivotViewer.Views.SimpleImageController = PivotViewer.Views.IImageController.sub
                         if (that._items[i].Images[0] == this) {
                             that._items[i].Width = this.width;
                             that._items[i].Height = this.height;
-                            that._loadedCount ++;
+                            that._loadedCount++;
+                            
+                            if (that._loadedCount == that._items.length) 
+                                $.publish("/PivotViewer/ImageController/Collection/Loaded", null);
+                            }
+                            
                         }
-                        if (that._loadedCount == that._items.length) 
-                            $.publish("/PivotViewer/ImageController/Collection/Loaded", null);
-                        }
+                        
                     };
                 var imageFile = images.ImageFiles[i];
                 if(/^(https?:)?\/\//.test(imageFile)) {
